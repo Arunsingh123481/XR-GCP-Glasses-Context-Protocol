@@ -1,0 +1,19 @@
+{
+  "spatial": {
+    "room": "living_room",
+    "dimensions": { "width": 4.0, "height": 2.5, "depth": 5.0 },
+    "objects": ["desk", "lamp", "sofa"]
+  },
+  "social": {
+    "people_nearby": 2,
+    "interaction_mode": "conversation"
+  },
+  "environmental": {
+    "light_level": "medium",
+    "noise_level": "low"
+  },
+  "user": {
+    "gaze_direction": "forward",
+    "activity": "working"
+  }
+}
