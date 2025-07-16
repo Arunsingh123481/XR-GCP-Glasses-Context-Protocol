@@ -1,172 +1,142 @@
-# NCP-Neural-Context-Protocol
-=======
-# XR-GCP Glasses Context Protocol
+# 🧠 XR-GCP + NCP: Context Fusion Protocol for Smart XR Glasses
 
-This repo contains the real-time fusion of GCP (Glasses Context Protocol) and NCP (Neural Context Protocol) for context-aware XR systems.
+This repository contains the prototype of a **real-time contextual inference system** that fuses **GCP (Glasses Context Protocol)** and **NCP (Neural Context Protocol)** to enable intelligent, context-aware behavior in XR devices.
 
-- Modular architecture
-- Flask-based API
-- GCP: spatial, environmental, user context
-- NCP: mood, intent, mental load prediction
+Designed for smart glasses, edge devices, and XR applications, this system can simulate user environments and predict mental states like **intent**, **mood**, and **mental load** using lightweight Python components.
 
 ---
 
-## 📦 Features
+## ⚙️ Key Features
 
-✅ Environmental sensing (light/noise levels)  
-✅ Social context (people nearby, interaction mode)  
-✅ Spatial context (room, objects, dimensions)  
-✅ User context (activity, gaze direction)  
-✅ REST API endpoint + Server-Sent Events (SSE) streaming  
-✅ Modular and portable Python implementation  
+- ✅ Modular GCP Adapter (spatial, environmental, user, and social context)
+- ✅ NCP Cognitive Engine (intent, mood, mental load)
+- ✅ Context fusion via Flask API
+- ✅ Real-time Server-Sent Events (SSE) streaming
+- ✅ Easily extensible to support gesture, EEG, and scene sensors
 
 ---
 
 ## 🌐 API Endpoints
 
-  Endpoint                 Description               Method 
+ Endpoint                Description                      Method 
+ `/api/context`         Get current GCP context           `GET`  
+ `/api/stream`          Real-time GCP stream              `GET`
+ `/api/fused_stream`    Auto-generated GCP+NCP stream     `GET`
 
-`/api/context`   Get current context as JSON           GET    
-`/api/stream`    Get real-time context updates         GET    
 
-Response Example:
+#Sample Output
 
-json :-
+json
 {
-  "environmental": {
-    "light_level": "medium",
-    "noise_level": "low"
-  },
-  "social": {
-    "interaction_mode": "conversation",
-    "people_nearby": 2
-  },
-  "spatial": {
-    "room": "living_room",
-    "dimensions": {
-      "width": 4.0,
-      "height": 2.5,
-      "depth": 5.0
-    },
-    "objects": ["desk", "lamp", "sofa"]
-  },
-  "user": {
-    "gaze_direction": "forward",
-    "activity": "working"
+  "spatial": {"room": "living_room", "objects": ["TV", "lamp"]},
+  "environmental": {"noise_level": "low", "light_level": "medium"},
+  "social": {"people_nearby": 2, "interaction_mode": "conversation"},
+  "user": {"activity": "relaxing", "gaze_direction": "left"},
+  "neural": {
+    "intent": "focus",
+    "mental_load": "medium",
+    "mood": "calm"
   }
 }
 
-How to Run on PC (Linux / Mac / Windows)
-
-1️⃣ Clone the repository:
+How to Run (Linux / Mac / Windows)
+1.Clone the Repository
 
 git clone https://github.com/Arunsingh123481/XR-GCP-Glasses-Context-Protocol.git
 cd XR-GCP-Glasses-Context-Protocol
 
-2️⃣ Create a virtual environment (recommended):
+2 Create Virtual Environment (recommended)
 
 python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate       # On Windows: venv\Scripts\activate
 
-3️⃣ Install requirements:
+3.Install Dependencies
 
 pip install -r requirements.txt
 
-4️⃣ Start the server:
+4.Run the Flask Server
 
+export XR_NCP_CONSENT=true
 python app.py
 
-5️⃣ Access on local device:
+🔗 Access Locally
 
     http://localhost:8080/api/context
 
-    http://localhost:8080/api/stream
+    http://localhost:8080/api/fused_stream
 
-👓 Deployment on Smart Glasses or Embedded Devices
-A. Ubuntu / Linux-based Smart Glasses (e.g., custom XR dev kits)
-
-    Ensure Python 3 and pip are installed.
-
-    Clone or copy this repository to the device.
-
-    Install requirements in a virtual environment:
+👓 Smart Glasses Deployment Guide
+A. Ubuntu/Linux XR Glasses
 
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+python app.py
 
-requirements.txt
+    ✅ Use gunicorn or systemd for production
+
+gunicorn -w 2 -b 0.0.0.0:8080 app:app
+
+B. Android-Based XR (Termux)
+
+pkg install python git
+git clone https://github.com/Arunsingh123481/XR-GCP-Glasses-Context-Protocol.git
+cd XR-GCP-Glasses-Context-Protocol
+pip install -r requirements.txt
+python app.py
+
+C. Custom Linux/Yocto XR Devices
+
+    Use pip or opkg to install Python 3.8+
+
+    Adapt mock_adapter.py to read from real sensors
+
+    Run app.py via background daemon or init system
+
+📦 requirements.txt
+
 Flask==2.3.3
 opencv-python==4.8.0.76
 sounddevice==0.4.6
 numpy==1.26.4
 
+💡 Innovation and Research Scope
 
-Start the server:
+This project introduces a standardized neural-environmental context protocol for XR, enabling:
 
-python app.py
+    🎯 Cognitive intent + mood prediction
 
-For production: run with Gunicorn or systemd:
+    🧠 Fusion of perceptual + neural context
 
-    gunicorn -w 2 -b 0.0.0.0:8080 app:app
+    🛠️ Modular architecture for edge devices
 
-    Access via local network or device loopback.
+    🔒 On-device, privacy-aware context inference
 
-B. Android-based Smart Glasses
+🧪 Research Potential
 
-For Android-based systems that support Python (e.g., via Termux):
+    📘 Publish as: “Neural-Environmental Context Fusion for Cognitive-Aware XR Systems”
 
-    Install Termux.
+    Topics you can expand:
 
-    Install Python:
+        Context modeling standards for wearables
 
-pkg install python
+        Fusion architectures (XR inference pipelines)
 
-Clone the repo:
+        Privacy-preserving local cognition models
 
-git clone https://github.com/Arunsingh123481/XR-GCP-Glasses-Context-Protocol.git
-cd XR-GCP-Glasses-Context-Protocol
+        Adaptive XR interfaces based on cognitive state
 
-Install requirements:
+Author
 
-pip install -r requirements.txt
+Arun Singh
+🔗 github.com/Arunsingh123481
 
-Run:
+🚀 Coming Soon
 
-    python app.py
+EEG input integration (Muse, NeuroSky)
 
-⚠️ Note: On Android you may need to adjust permissions for microphone/camera if your mock context uses them.
-C. Other OS (e.g., Yocto, custom Linux)
+Webcam + emotion AI integration
 
-    Ensure you have Python 3.8+ support.
+React dashboard UI
 
-    Use pip to install Flask and other dependencies.
-
-    Copy or clone the project.
-
-    Adapt mock_context.py to use available sensors/APIs on your hardware.
-
-    Run the server as a service or background process.
-
-💡 Innovation
-
-This protocol defines a standardized, machine-readable context model for XR and wearable devices, enabling:
-
-  Adaptive interfaces
-
-  Context-aware applications
-
-  Simulated and real sensor integration
-
-  Local privacy-preserving computation
-
-Research potential:
-You can extend this work into a research paper by discussing:
-
-  Context modeling standards for XR
-
-  Implementation architecture
-
-  Privacy design (on-device API)
-
-  Developer feedback and use-
+Gesture → Intent fusion
